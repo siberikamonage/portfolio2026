@@ -1,0 +1,30 @@
+---
+import { url } from '../../data/site';
+
+interface Props {
+  images: string[];
+  alt?: string;
+}
+
+const { images, alt = '' } = Astro.props;
+const slug = Astro.url.pathname.split('/').filter(Boolean).pop();
+---
+
+<div class="gallery wide">
+  {images.map((src) => <img src={url(`images/${slug}/${src}`)} alt={alt} loading="lazy" decoding="async" />)}
+</div>
+
+<style>
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+  .gallery img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+import { url } from '../../data/site';
+
+interface Props {
+  image: string;
+  alt?: string;
+}
+
+const { image, alt = '' } = Astro.props;
+const slug = Astro.url.pathname.split('/').filter(Boolean).pop();
+---
+
+<div class="split">
+  <div class="split__text"><slot /></div>
+  <img src={url(`images/${slug}/${image}`)} alt={alt} loading="lazy" decoding="async" />
+</div>
+
+<style>
+  .split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 24px;
+    margin-block: 72px;
+  }
+  .split__text :global(h3) {
+    font: 400 var(--fs-h3) / 1.25 var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .split__text :global(* + *) {
+    margin-top: 24px;
+  }
+  .split img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+  }
+  @media (max-width: 809px) {
+    .split {
+      grid-template-columns: 1fr;
+      margin-block: 48px;
+    }
+  }
+</style>

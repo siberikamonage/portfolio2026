@@ -1,0 +1,76 @@
+---
+import CarouselShell from './CarouselShell.astro';
+import { url } from '../../data/site';
+
+interface Slide {
+  title: string;
+  text: string;
+  list?: string[];
+  image?: string | null;
+}
+interface Props {
+  slides: Slide[];
+  label?: string;
+}
+
+// Carousel where each slide pairs a short text with an image.
+const { slides, label = 'Highlights' } = Astro.props;
+const slug = Astro.url.pathname.split('/').filter(Boolean).pop();
+---
+
+<CarouselShell label={label} count={slides.length}>
+  {
+    slides.map((s, i) => (
+      <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${slides.length}`}>
+        <div class="slide__text">
+          <h4>{s.title}</h4>
+          <p>{s.text}</p>
+          {s.list && s.list.length > 0 && (
+            <ul>
+              {s.list.map((li) => (
+                <li>{li}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+        {s.image && <img src={url(`images/${slug}/${s.image}`)} alt="" loading="lazy" decoding="async" />}
+      </div>
+    ))
+  }
+</CarouselShell>
+
+<style>
+  .slide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 48px;
+    padding: 48px 48px 96px;
+  }
+  .slide__text {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .slide__text h4 {
+    font: 400 var(--fs-h3) / 1.25 var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .slide__text ul {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  .slide img {
+    width: 100%;
+    max-height: 560px;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+  }
+  @media (max-width: 809px) {
+    .slide {
+      grid-template-columns: 1fr;
+      gap: 24px;
+      padding: 24px 24px 80px;
+    }
+  }
+</style>

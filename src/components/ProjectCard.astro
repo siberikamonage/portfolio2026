@@ -1,0 +1,84 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { site, url } from '../data/site';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  eager?: boolean;
+}
+
+const { project, eager = false } = Astro.props;
+const { cardTitle, years, field, tags, description, cover, coverAlt, nda } = project.data;
+const href = nda ? `mailto:${site.email}?subject=${encodeURIComponent(cardTitle)}` : url(project.id);
+---
+
+<article class="card" data-reveal>
+  <a class="card__link" href={href}>
+    <div class="card__media">
+      <img src={url(`images/${cover}`)} alt={coverAlt} width="1312" height="738" loading={eager ? 'eager' : 'lazy'} />
+    </div>
+    <h3 class="card__title display h2">{cardTitle}</h3>
+    <p class="card__meta">
+      <span>{years}</span>
+      <span>{field}</span>
+      <span>{tags.join(', ')}</span>
+    </p>
+    <p class="card__desc">{description}</p>
+    <span class="btn card__btn">
+      {nda && <span aria-hidden="true">🔒</span>}
+      {nda ? 'Under NDA — ask me' : 'Read Story'}
+    </span>
+  </a>
+</article>
+
+<style>
+  .card__link {
+    display: block;
+    text-decoration: none;
+  }
+  .card__media {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  .card__media img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+  .card__link:hover .card__media img {
+    transform: scale(1.03);
+  }
+  .card__link:hover .card__btn {
+    background: var(--btn-bg-hover);
+  }
+  .card__title {
+    margin-top: 24px;
+  }
+  .card__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 24px;
+    margin-top: 16px;
+    color: var(--fg-muted);
+  }
+  .card__desc {
+    margin-top: 16px;
+  }
+  .card__btn {
+    margin-top: 32px;
+  }
+  @media (max-width: 809px) {
+    .card__title {
+      margin-top: 16px;
+    }
+    .card__meta {
+      font-size: 16px;
+      gap: 4px 16px;
+    }
+    .card__btn {
+      margin-top: 24px;
+    }
+  }
+</style>

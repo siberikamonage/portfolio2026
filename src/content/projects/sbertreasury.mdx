@@ -1,0 +1,240 @@
+---
+title: Enterprise financial managing system
+cardTitle: Enterprise Financial Flows Managing System
+description: Web client for viewing, managing and controlling financial flows of large enterprises with complex organizational structure
+years: 2021 – 2022
+field: B2B
+tags: [Thorough Research, Team Management]
+cover: projects/sbertreasury.webp
+coverAlt: SberTreasury service settings screen on a teal background with embossed lettering
+accent: "#17806E"
+order: 2
+meta:
+  timeline: May 2021 – Dec 2022
+  field: Enterprise FinTech
+  team: Designers, Product Owners, Business & System Analysts, QA Testers
+  role: Product Designer, Scrum Master
+---
+
+## Project Overview
+
+Before 2021, managing financial flows for large B2B enterprises was usually done through scattered Excel spreadsheets or outdated legacy solutions. This meant it was hard to notice subtle changes, control monetary transactions precisely, and perform multiple actions at once. This is why our team at Sberbank decided to develop a solution that would tackle all of these challenges. Our online banking service, SberTreasury, aimed to become one of Russia's first comprehensive treasury platforms for managing financial flows. It needed to replace outdated legacy banking solutions for current users while attracting new enterprise clients.
+
+<Split image="MV0YyCASon7N86CUQzDEwhMHi4.webp" alt="The SberTreasury design team on a video call">
+
+### Our design team
+
+In a team of 3 designers, we covered the needs of 7 products within SberTreasury by designing workflows, conducting user research and benchmarking, and building a local design system. We worked under the guidance of a Design Lead in close collaboration with Product Managers and product teams.
+
+</Split>
+
+I joined the team in mid-2021, right when the design team was forming. At the time, SberTreasury had just one product with one feature—monitoring accounts' unified balance, the rest was presented in the legacy system SberCorporation.
+
+<Carousel images={["selB0WBE9OzS9pE7ErUhSUtZ7pE.webp", "gNImmHH9jDWY6aeKZwo2jeSM8.webp", "HzjwFf7kNbYks0yjtWOkvhteG8.webp", "a94WvO8vSoSdJFezuhXY5SRmmmY.webp"]} />
+
+Over the span of 1.5 years, we managed to craft 6 more fully operating products that constituted 80% of our migration goals. As a design team, we created a strong and efficient design process that helped us manage the needs and requests of multiple product teams.
+
+**Key results**
+
+- Completed 80% of the migration goal by creating sophisticated user flows to manage all necessary banking operations
+- More than 200 Russian enterprise companies were using SberTreasury by the end of 2022, compared to around 30 companies in 2021. Each company's requests were taken into consideration by our managers and thoughtfully addressed by the design team
+- Lead Time metric was reduced from 8-10 weeks to 2-3 weeks after implementing an agile-driven design process. The design team embraced changes that included design sprints and working within agile ceremonies (daily standups, backlog grooming and planning, retros)
+- Our design team gained more appreciation and external team satisfaction measured with a CSI survey, which resulted in an 80% satisfaction score in September 2022
+
+<Stats accent="#17806E" items={[{"value":"80%","label":"Successfully migrated products from the legacy service"},{"value":"8–10 → 2 weeks","label":"Lead Time reduced after implementing agile-driven design process in the design team"},{"value":"7.5x","label":"Increase in deployed features"},{"value":"200","label":"Enterprise companies using SberTreasury in 2022"}]} />
+
+## Understanding the Problem Space
+
+SberTreasury entered a market dominated by local legacy banking software that enterprises had used for decades. Our challenge wasn't just building features—it was convincing treasurers and finance managers to abandon familiar yet inconvenient tools for an unknown platform. The business needed to:
+
+- Replace aging legacy systems for existing Sberbank corporate clients
+- Attract new enterprise clients by addressing their specific requests
+- Create a scalable foundation for future treasury management features
+- Build a modern web solution that could compete with established desktop software
+
+Through stakeholder interviews and ongoing feedback, we identified three distinct user groups:
+
+<SlideCarousel slides={[{"title": "1. Finance Managers & Treasurers (Primary External Users)", "text": "Professionals managing cash flow, liquidity, and financial operations across multiple entities within large corporations. They needed to:", "list": ["Process high volumes of payments accurately", "Maintain visibility across complex organizational structures", "Manage workflows requiring multiple approval levels", "Trust the system with mission-critical financial operations"], "image": "DUkmyK5YuXZXxTXOlxGuowBvU.webp"}, {"title": "2. CEOs & Senior Managers (Secondary External Users)", "text": "Decision-makers who needed quick financial oversight without navigating complex interfaces. They required:", "list": ["At-a-glance financial summaries", "Mobile access for approvals on the go"], "image": "xQOOVlj0v5Z7EbVTIFCldwrwvsQ.webp"}, {"title": "3. Operational Center Staff (Internal Users)", "text": "Sber employees processing payment requests and managing customer support. Their pain points:", "list": ["Manually processing hundreds of payment forms and documents", "Using an outdated, heavyweight legacy solution", "No systematic workflow or status tracking"], "image": "d5IpvS8BKxU3ZBuoh5XEv9ruYM.webp"}]} />
+
+## Understanding User Needs
+
+Unlike consumer products with dedicated discovery phases, our design process at SberTreasury was **iterative and feedback-driven**. We gathered insights through multiple ongoing channels rather than discrete research sessions:
+
+1. **Product Manager Priorities** - Business requirements and strategic goals filtered through strategy sessions with our PM
+1. **Support Team Feedback** - Direct user complaints, confusion patterns, and feature requests from customer service logs
+1. **Direct User Requests** - Some company managers reached out to our stakeholders directly, asking for specific changes to the platform
+1. **Usage Analytics** - Discoverability issues, drop-off rates, and behavior patterns of existing users
+
+<Gallery images={["hhbeC3NLI3DDt6EVN0y9qZmQg.webp", "WVTw1OYMaUunbynWCHsYQw6gE8A.webp"]} />
+
+## Design Approach 1: Existing Users – The Ruble Payment Form
+
+The Ruble Payment Form is a document that accountants and financial officers fill out daily. This document connects the reason why a company spent money with how much was spent. This form is one of the most frequently used by our existing users, so we had to create a universal, convenient, and easy-to-use flow. Our task was to digitize the workflow without losing users' trust or creating friction during migration.
+
+**Success Criteria:**
+
+- Match or exceed the efficiency of previous workflows
+- Maintain high accuracy and usability
+- Support expandability for future payment types
+
+For the first phase of design exploration, we began by researching patterns among existing B2B platforms. We performed benchmarking research to understand how other top Russian banks organized their Ruble Payment Forms. I explored patterns from Tochka, Alfa, VTB, Otkritie, Tinkoff, PSB, Raiffeisen, 1C, and SBB (Sberbank's solution).
+
+Based on the benchmarking research, I gathered questions to ask our users during UX interviews:
+
+**Testing Questions:**
+
+- The order of payer-recipient: Should "to whom" or "from whom" come first?
+- Is it important for the entire form to fit within the height of the screen?
+- Should all fields be visible at once, or can the form be dynamic?
+- Is it necessary to review the payment order again before signing?
+- Is an import option from 1C needed next to the fields for manual input?
+- Should the payment type be selected first?
+- Is it necessary to explicitly differentiate payments to non-residents/individuals?
+- Is a tutorial on filling out the payment order form needed?
+
+To find answers to these questions, we created Kano-model quantitative surveys and distributed them among our current users. Based on the data gathered from the surveys, we moved forward with creating a draft solution to test during UX interviews.
+
+As part of our exploratory process, we developed two options for the Ruble Payment Form:
+
+<Carousel images={["gUCIenNv3Z61AvmnZz2h9VbXBE.webp", "sPkdbcPZampRWNwiDjQTGEjQ8.webp"]} />
+
+**Option 1: Modern, Flexible Form**
+
+- Contextual field groups appearing based on previous selections
+- Quick 1C file upload for automatic content filling
+
+<Figure src="CvCOBCsnXZ5nIMs7xP6BsyvC9d4.webp" />
+
+**Option 2: Universal Traditional Form**
+
+- All fields visible (with expandable sections for additional details)
+- Linear top-to-bottom flow matching physical forms
+- Familiar terminology and field ordering
+- Minimal conditional logic
+
+<Figure src="v5XXRDO9fsl0o9JdfoX9qT8YA.webp" />
+
+We conducted qualitative interviews with 6 users, showing them both options for the Ruble Payment Form. The interview participants included users who actively created payments in the legacy system, as well as accountants and economists who used other online banks.
+
+**Qualitative Feedback:**
+
+Despite Option A being more flexible and modern, users expressed significantly higher anxiety and lower confidence:
+
+*"This [Option A] looks nice, but I'm not sure if I'm doing it right. Where do I put the correspondent bank details?"*
+
+*"This [Option B] feels safe. I can see everything and know I haven't missed anything."*
+
+<Figure src="JTiwDGbLoeL01TjIOv3NPtk.webp" />
+
+We chose **Option B**—the universal form design—even though it contradicted my initial preference for the modern approach.
+
+**Rationale:**
+
+In B2B financial software, user confidence matters more than form flexibility for speed optimization or appealing UI. Finance managers processing millions in transactions needed psychological reassurance, not just efficient UX. The familiar layout provided that reassurance.
+
+## Design Approach 2: New Users – Simplified Access Path
+
+While existing users needed comprehensive tools, new enterprise clients had a different problem: **decision-makers needed quick financial visibility on the go.**
+
+Research with sales and product teams revealed that CEOs and senior managers often needed to see account balances and approve payments quickly—especially on mobile.
+
+### Solution
+
+Our core concept was to enhance the table component that already existed, but it wasn't addressing all the needs of enterprise customers and didn't support mobile web. Besides, the component was part of an external design system we didn't have access to modify.
+
+Following that discovery, we gathered user needs from our support team, discussed limitations and constraints with developers, and held several meetings about business goals for this task. Finally, we decided to create our own table component with mobile web support.
+
+**Key Goals for Improving the Component:**
+
+1. Make the table mobile-friendly for executives who weren't using the web version but still wanted a full range of capabilities
+1. Make adjustments to the web component so it's more usable for large enterprise companies with specific needs: millions of table rows and more than 10-15 table columns
+
+Before designing drafts, we gathered user needs, business objectives, and development limitations into actionable JTBDs:
+
+1. When a Treasury user needs to extract specific information from a table, they don't want to configure filters to save time
+1. When a Treasury user needs to view data on accounts and organizations, they don't want to switch between pages to avoid memorizing data from different sources
+1. When a Treasury user is not at their workstation, they want to use Treasury to continue monitoring account status and conducting transactions
+
+And this was the result:
+
+<Carousel images={["4IHzgSZebM9RWQGDiP9URzkVQ.webp", "fRFBAvAAVFO0oJ0evRjuJLYVJX4.webp", "dGqj8YY91L77QMjARCkNF7Ig9s.webp"]} />
+
+For the final solution, we created a table component for desktop and mobile that included:
+
+- Comprehensive implementation guide for developers
+- User flow prototypes for the QA testing team
+- Specifications and measurements for the mobile web component
+
+Mobile component included 90% of the features available in the web version.
+
+<Carousel images={["1eaKeG63enkWBCQTHgzBgYW58s.webp", "CqrycbQXlj3QOSkGsFCqmndBAX4.webp", "lyRU6aKFAfzGvfo6VxOXeXS08s.webp"]} />
+
+### Maybe too flexible?
+
+Since the component was very flexible and customizable, we received a lot of positive feedback from our users. However, it took several months for our development team to develop the component incrementally because each feature required a lot of manually written code. Besides, some features like "sticky header" were never implemented and remained in the backlog.
+
+<Figure src="WAq8wyXsPTi8RWGg9kJmz3gz8.webp" />
+
+## Design Process improvements – better team work
+
+After a year of working on the team, we started receiving negative feedback from our product teams saying the design team wasn't working effectively and it took too long to get designs from us. We started asking ourselves: what's going on?
+
+The challenge was that 3 designers supported 7 product teams with semantically similar yet significantly opposite banking products.
+
+**Here's what we noticed:**
+
+- Slow designs, slow iteration, and delayed changes
+- Inconsistent design quality among products
+- Communication breakdowns between design and engineering
+- Some tasks were outside the designer's scope, and the data provided in tasks was insufficient
+
+After discussions with designers and PMs, we came up with the idea to follow the path of other product teams within SberTreasury and implement an agile approach. For that reason, I took the initiative to complete a Scrum Master online course to navigate our team toward better efficiency and productivity. Along with my learning journey, here are the improvements we implemented:
+
+**1. Task Grooming, Evaluation & Design Review Checklists**
+
+First, we implemented weekly design sprint task evaluation and grooming. This ensured that any task appearing in the current design sprint was ready to be designed, had sufficient data, and wasn't too large. To measure the Definition of Ready and Definition of Done for each task, we created structured checklists for cross-design review at two critical stages:
+
+- **Before Design:** Ensuring clear problem definition, research insights, and success criteria
+- **After Design:** Verifying design system compliance, accessibility, and technical feasibility
+
+<Figure src="XodvS871F5VZ07COIvvBivs9KE.webp" />
+
+**2. Design Sprints**
+
+We implemented time-boxed design sprints aligned with development cycles, improving predictability and reducing thrash.
+
+**3. Syncing Sessions**
+
+To ensure high-quality design production and consistency for every flow, we set up syncing sessions with other designers within the larger B2B cluster during the design sprint, PM sync sessions before finalizing, and synced with developers and QA team members during the development phase. This approach guaranteed we caught each bug and imperfection as soon as possible.
+
+<Figure src="z6ArqtsoS3wbPj1FlO2gFrQmwBE.webp" />
+
+### Results and impact
+
+- **Lead Time:** 8-10 weeks → 2-3 weeks
+- **Development TTM:** 2-3 weeks → 1 week
+- Improved mood/satisfaction scores based on CSI internal surveys
+- Fewer negative feedback cards during retrospectives
+- Increased design team morale from more structured collaboration
+
+However, while the approach proved to increase efficiency and other teams appreciated the changes, designers started to feel more insecure. After several months of working with this approach, we received more negative cards in retros indicating that designers felt overwhelmed and uneasy. Some team members pointed out that switching to sprints made them feel like they couldn't keep up with the pace.
+
+## Reflection & Learnings
+
+**User Confidence Matters More**
+
+Working in the B2B field, especially with enterprise clients, is very different from B2C. Standard popular usability patterns might not be applicable. Some decisions seemed weird to me, like creating a non-flexible Payment Form, but users proved they needed exactly this type of form.
+
+**Measuring Design Team Efficiency**
+
+Grooming tasks, evaluating them, and setting clear sprint goals ensured we understood our own value and efficiency. Being aware of the specifics of each task boosted my general knowledge about SberTreasury and my desire to participate in the project more actively.
+
+### What I'd do differently
+
+**Stronger Baseline Metrics**
+
+I wish I'd documented more quantitative baseline measurements before launch—specific error rates, exact completion times, and precise support ticket categories. This would have made impact measurement more rigorous.
+
+**More Research and User Data Gathering**
+
+While user feedback was clear, I wonder if a longer evaluation period (2-3 weeks vs. single sessions) would have revealed whether users adapted to the new design over time. Trust might have been a learning curve issue rather than a fundamental preference.

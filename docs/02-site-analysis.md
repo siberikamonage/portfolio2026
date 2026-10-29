@@ -346,3 +346,28 @@ public/
 5. **Hosting & domain:** Vercel, Netlify, or GitHub Pages? A custom domain?
 6. **Stack:** OK with Astro + Tailwind + MDX, or do you prefer Next.js?
 7. **Draft pages** (`/mini-articles/*`, `/large-articles/*`): confirm they can be dropped.
+
+---
+
+## 10. Decisions (2026-10-29)
+
+| Question | Decision |
+|---|---|
+| Fonts | Licensed files will be uploaded to `public/fonts/`; free fallbacks (Space Grotesk, Inter Tight) until then |
+| Name | **Alina Nizamitinova** |
+| Design | Port the site and refresh it at the same time |
+| Stack / hosting | Astro + MDX, GitHub Pages (free, deploys from this repo) |
+| Draft CMS pages | Dropped |
+
+### What the refresh changed vs. the Framer site
+- Name updated everywhere; real page titles, descriptions, OG images, favicon
+- Email is now a working `mailto:` link
+- Descriptive `alt` text on covers and personal photos
+- Removed copy duplicates on /technobrand (repeated paragraphs under "User Personas" and
+  "Drafts", and the "Results & Validation" block that repeated "Design Decisions")
+- "Solution 2" renamed to "Vacancy Search & Filtering" (it was a copy of Solution 1's title)
+- Case studies now have the contacts footer and a "Next project" link
+- NDA card links to email ("Under NDA — ask me") instead of a dead button
+- Header gets a blurred background on scroll; project covers zoom slightly on hover
+- Carousels show a counter, support keyboard arrows and swipe
+- Images converted to WebP (~9 MB total, from much larger PNG/JPG originals)

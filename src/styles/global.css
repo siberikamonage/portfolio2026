@@ -1,0 +1,306 @@
+/* ---------- Fonts ----------
+   Licensed files go in public/fonts/ (see public/fonts/README.md).
+   Until they are added, the free look-alikes loaded in Base.astro are used. */
+@font-face {
+  font-family: 'Sharp Grotesk';
+  src: url('/fonts/SharpGrotesk-Book20.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Neue Montreal';
+  src: url('/fonts/NeueMontreal-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+
+/* ---------- Tokens ---------- */
+:root {
+  --black: #080808;
+  --white: #ffffff;
+  --grey-surface: #f5f5f5;
+  --muted-word: #5e5e5e;
+
+  --font-display: 'Sharp Grotesk', 'Space Grotesk', system-ui, sans-serif;
+  --font-body: 'Neue Montreal', 'Inter Tight', system-ui, sans-serif;
+
+  --gutter: 64px;
+  --prose-width: 1064px;
+  --radius-lg: 20px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --header-h: 88px;
+
+  --ease: cubic-bezier(0.44, 0, 0.56, 1);
+
+  /* Type scale: desktop */
+  --fs-title: 88px;
+  --fs-h1: 64px;
+  --fs-h2: 48px;
+  --fs-h3: 32px;
+  --fs-body: 20px;
+}
+
+/* Themes: home is dark, case studies are light */
+.theme-dark {
+  --bg: var(--black);
+  --fg: var(--white);
+  --fg-muted: rgba(255, 255, 255, 0.6);
+  --fg-subtle: rgba(255, 255, 255, 0.64);
+  --surface: rgba(255, 255, 255, 0.08);
+  --btn-bg: rgba(255, 255, 255, 0.24);
+  --btn-bg-hover: rgba(255, 255, 255, 0.16);
+  --btn-primary-bg: var(--white);
+  --btn-primary-fg: var(--black);
+  --btn-primary-hover: rgba(255, 255, 255, 0.88);
+}
+.theme-light {
+  --bg: var(--white);
+  --fg: var(--black);
+  --fg-muted: rgba(8, 8, 8, 0.6);
+  --fg-subtle: rgba(8, 8, 8, 0.6);
+  --surface: var(--grey-surface);
+  --btn-bg: rgba(8, 8, 8, 0.08);
+  --btn-bg-hover: rgba(8, 8, 8, 0.14);
+  --btn-primary-bg: var(--black);
+  --btn-primary-fg: var(--white);
+  --btn-primary-hover: rgba(8, 8, 8, 0.8);
+}
+
+@media (max-width: 1199px) {
+  :root {
+    --gutter: 32px;
+    --fs-title: 64px;
+    --fs-h1: 52px;
+    --fs-h2: 40px;
+    --fs-h3: 28px;
+    --fs-body: 18px;
+  }
+}
+@media (max-width: 809px) {
+  :root {
+    --gutter: 16px;
+    --header-h: 64px;
+    --fs-title: 40px;
+    --fs-h1: 40px;
+    --fs-h2: 32px;
+    --fs-h3: 24px;
+    --fs-body: 16px;
+  }
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+a {
+  color: inherit;
+}
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol {
+  margin: 0;
+}
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+[id] {
+  scroll-margin-top: var(--header-h);
+}
+
+.container {
+  padding-inline: var(--gutter);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+.title {
+  font-size: var(--fs-title);
+  line-height: 1.09;
+}
+.h1 {
+  font-size: var(--fs-h1);
+  line-height: 1.19;
+}
+.h2 {
+  font-size: var(--fs-h2);
+  line-height: 1.1;
+}
+.muted {
+  color: var(--fg-muted);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 24px;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--btn-bg);
+  color: var(--fg);
+  font: 500 var(--fs-body) / 1.4 var(--font-body);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.2s var(--ease);
+}
+.btn:hover {
+  background: var(--btn-bg-hover);
+}
+.btn--primary {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-fg);
+}
+.btn--primary:hover {
+  background: var(--btn-primary-hover);
+}
+.btn--lg {
+  min-width: 250px;
+  min-height: 76px;
+}
+@media (max-width: 809px) {
+  .btn {
+    font-size: 16px;
+  }
+  .btn--lg {
+    min-width: 0;
+    min-height: 56px;
+    width: 100%;
+  }
+}
+
+/* ---------- Reveal on scroll ---------- */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+.js [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .js [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ---------- Case-study prose ---------- */
+.prose {
+  display: flow-root;
+}
+.prose > * {
+  max-width: var(--prose-width);
+  margin-inline: auto;
+}
+.prose > * + * {
+  margin-top: 24px;
+}
+.prose h2 {
+  font: 400 var(--fs-h2) / 1.1 var(--font-display);
+  letter-spacing: -0.04em;
+  margin-top: 120px;
+}
+.prose h3 {
+  font: 400 var(--fs-h3) / 1.25 var(--font-display);
+  letter-spacing: -0.02em;
+  margin-top: 72px;
+}
+.prose h4 {
+  font: 500 var(--fs-body) / 1.4 var(--font-body);
+  margin-top: 48px;
+}
+.prose h2 + *,
+.prose h3 + *,
+.prose h4 + * {
+  margin-top: 24px;
+}
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+}
+.prose li + li {
+  margin-top: 8px;
+}
+.prose strong {
+  font-weight: 500;
+}
+.prose .wide {
+  max-width: none;
+  margin-top: 72px;
+  margin-bottom: 72px;
+}
+.prose .wide + .wide {
+  margin-top: 24px;
+}
+@media (max-width: 809px) {
+  .prose h2 {
+    margin-top: 80px;
+  }
+  .prose h3 {
+    margin-top: 48px;
+  }
+  .prose .wide {
+    margin-block: 48px;
+  }
+}

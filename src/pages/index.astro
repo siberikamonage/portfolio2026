@@ -1,0 +1,156 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { site, url } from '../data/site';
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+
+const photos = [
+  { src: 'CbMjBLk1qq9cLDNiF5qRkfv8s0.webp', alt: 'Chinese pavilion in a garden with misty water' },
+  { src: 'ZBEnfvxTxXiTzgfktsUsSOGLM.webp', alt: 'Alina running into the sea on a sunny beach' },
+  { src: 'Qp3FQvhA2YDiwGRXcL0ppfIicws.webp', alt: 'Hand writing in a notebook next to a cup of coffee' },
+  { src: 'ZLioBGNMERXQ0UmmWV6m9XeZB0.webp', alt: 'Personal photo' },
+  { src: 'UGZeIzwMuU2hgM3TTKFdPEK9BE.webp', alt: 'Personal photo' },
+];
+---
+
+<Base theme="dark" variant="home">
+  <section class="hero container">
+    <h1 class="hero__title display h1">
+      Product designer <span class="hero__soft">creating</span> cohesive <span class="hero__soft">digital</span>
+      experiences <span class="hero__soft">through</span> systematic research
+    </h1>
+    <div class="hero__actions">
+      <a class="btn btn--lg" href={site.cv} target="_blank" rel="noopener noreferrer">CV</a>
+      <a class="btn btn--primary btn--lg" href="#contacts">Hire me</a>
+    </div>
+  </section>
+
+  <section class="projects container" id="projects" aria-label="Projects">
+    {projects.map((project, i) => <ProjectCard project={project} eager={i === 0} />)}
+  </section>
+
+  <section class="about" id="about">
+    <div class="about__intro container" data-reveal>
+      <h2 class="display h1">Curiosity-driven life.<br />Research-backed design.</h2>
+      <p class="about__text">
+        I approach design the way I approach life – with curiosity, consistency, and focus on what matters. This
+        approach helps me solve ambiguous problems in B2B/FinTech environments where user, business, and technical
+        needs compete.
+      </p>
+    </div>
+    <ul class="about__photos" aria-label="Personal photos" tabindex="0">
+      {
+        photos.map((p) => (
+          <li>
+            <img src={url(`images/about/${p.src}`)} alt={p.alt} loading="lazy" decoding="async" width="429" height="549" />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding-top: calc(var(--header-h) + 52px);
+    padding-bottom: 112px;
+    text-align: center;
+  }
+  .hero__title {
+    max-width: 960px;
+    margin-inline: auto;
+  }
+  .hero__soft {
+    color: var(--muted-word);
+  }
+  .hero__title,
+  .hero__actions {
+    animation: hero-in 1s 0.2s cubic-bezier(0.25, 0.1, 0.25, 1) both;
+  }
+  .hero__actions {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 40px;
+    animation-delay: 0.4s;
+  }
+  @keyframes hero-in {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero__title,
+    .hero__actions {
+      animation: none;
+    }
+  }
+
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 140px;
+  }
+
+  .about {
+    padding-top: 240px;
+  }
+  .about__intro {
+    text-align: center;
+  }
+  .about__text {
+    max-width: 680px;
+    margin: 32px auto 0;
+    color: #8a8a8a;
+    line-height: 1.6;
+  }
+  .about__photos {
+    display: flex;
+    gap: 24px;
+    margin: 64px 0 0;
+    padding: 0 var(--gutter);
+    list-style: none;
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scroll-padding-inline: var(--gutter);
+    scrollbar-width: none;
+  }
+  .about__photos::-webkit-scrollbar {
+    display: none;
+  }
+  .about__photos li {
+    flex: 0 0 min(429px, 78vw);
+    scroll-snap-align: start;
+  }
+  .about__photos img {
+    width: 100%;
+    aspect-ratio: 429 / 549;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+
+  @media (max-width: 809px) {
+    .hero {
+      padding-top: calc(var(--header-h) + 24px);
+      padding-bottom: 64px;
+    }
+    .hero__actions {
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 32px;
+    }
+    .projects {
+      gap: 96px;
+    }
+    .about {
+      padding-top: 160px;
+    }
+    .about__photos {
+      gap: 12px;
+      margin-top: 40px;
+    }
+  }
+</style>

@@ -1,0 +1,81 @@
+---
+import { site } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer container" id="contacts">
+  <div class="footer__main" data-reveal>
+    <h2 class="display h1">Let’s keep in touch</h2>
+    <ul class="footer__socials">
+      {
+        site.socials.map((s) => (
+          <li>
+            <a class="btn" href={s.href} target="_blank" rel="noopener noreferrer">
+              {s.label} ↗
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+  <div class="footer__bottom">
+    <a href={`mailto:${site.email}`}>{site.email}</a>
+    <p class="footer__copy">© {year} {site.name}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding-top: 240px;
+    padding-bottom: 32px;
+  }
+  .footer__main {
+    text-align: center;
+  }
+  .footer__socials {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-top: 40px;
+    padding: 0;
+    list-style: none;
+  }
+  .footer__socials .btn {
+    min-width: 272px;
+    min-height: 76px;
+  }
+  .footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 240px;
+  }
+  .footer__copy {
+    color: var(--fg-subtle);
+  }
+  @media (max-width: 1199px) {
+    .footer__socials .btn {
+      min-width: 200px;
+    }
+  }
+  @media (max-width: 809px) {
+    .footer {
+      padding-top: 160px;
+    }
+    .footer__socials {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer__socials .btn {
+      width: 100%;
+      min-height: 56px;
+    }
+    .footer__bottom {
+      flex-direction: column-reverse;
+      margin-top: 120px;
+      font-size: 16px;
+    }
+  }
+</style>

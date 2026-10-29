@@ -1,0 +1,83 @@
+---
+interface Item {
+  title: string;
+  text?: string;
+  list?: string[];
+  wide?: boolean;
+}
+interface Props {
+  items: Item[];
+  accent?: string;
+}
+
+const { items, accent = '#080808' } = Astro.props;
+---
+
+<div class="results wide" style={`--accent:${accent}`}>
+  {
+    items.map((item, i) => (
+      <div class:list={['result', i === 0 && 'result--accent', item.wide && 'result--wide']}>
+        <h4 class="result__title">{item.title}</h4>
+        {item.text && <p>{item.text}</p>}
+        {item.list && (
+          <ul>
+            {item.list.map((li) => (
+              <li>{li}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .results {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .result {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 48px;
+    border-radius: var(--radius-lg);
+    background: var(--grey-surface);
+  }
+  .result--accent {
+    background: var(--accent);
+    color: var(--white);
+  }
+  .result--wide {
+    grid-column: 1 / -1;
+  }
+  .result__title {
+    font: 400 var(--fs-h3) / 1.25 var(--font-display);
+    letter-spacing: -0.02em;
+  }
+  .result ul {
+    margin: 0;
+    padding-left: 1.2em;
+  }
+  .result li + li {
+    margin-top: 8px;
+  }
+  @media (max-width: 1199px) {
+    .results {
+      grid-template-columns: 1fr 1fr;
+    }
+    .result {
+      padding: 32px;
+    }
+  }
+  @media (max-width: 809px) {
+    .results {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .result {
+      padding: 24px;
+    }
+  }
+</style>

@@ -1,0 +1,127 @@
+---
+// Shared frame for Carousel and SlideCarousel: a scroll-snap track with prev/next buttons.
+interface Props {
+  label: string;
+  count: number;
+}
+
+const { label, count } = Astro.props;
+---
+
+<section class="carousel wide" aria-roledescription="carousel" aria-label={label} data-carousel>
+  <div class="carousel__track" data-track tabindex="0">
+    <slot />
+  </div>
+  {
+    count > 1 && (
+      <div class="carousel__controls">
+        <button class="carousel__btn carousel__btn--prev" type="button" aria-label="Previous slide" data-prev disabled>
+          ←
+        </button>
+        <span class="carousel__count" aria-live="polite" data-count>
+          1 / {count}
+        </span>
+        <button class="carousel__btn carousel__btn--next" type="button" aria-label="Next slide" data-next>
+          →
+        </button>
+      </div>
+    )
+  }
+</section>
+
+<style>
+  .carousel {
+    position: relative;
+    border-radius: var(--radius-lg);
+    background: var(--grey-surface);
+    overflow: hidden;
+  }
+  .carousel__track {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+  }
+  .carousel__track::-webkit-scrollbar {
+    display: none;
+  }
+  .carousel__track > :global(*) {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
+  }
+  .carousel__controls {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 6px;
+    border-radius: 999px;
+    background: rgba(8, 8, 8, 0.56);
+    color: var(--white);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  .carousel__btn {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    color: inherit;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  .carousel__btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.32);
+  }
+  .carousel__btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+  }
+  .carousel__count {
+    min-width: 3.5em;
+    font-size: 16px;
+    text-align: center;
+  }
+  @media (max-width: 809px) {
+    .carousel__controls {
+      right: 12px;
+      bottom: 12px;
+    }
+    .carousel__btn {
+      width: 32px;
+      height: 32px;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carousel]').forEach((root) => {
+    const track = root.querySelector<HTMLElement>('[data-track]')!;
+    const prev = root.querySelector<HTMLButtonElement>('[data-prev]');
+    const next = root.querySelector<HTMLButtonElement>('[data-next]');
+    const count = root.querySelector('[data-count]');
+    const total = track.children.length;
+    if (!prev || !next || !count) return;
+
+    const index = () => Math.round(track.scrollLeft / track.clientWidth);
+    const go = (i: number) => track.scrollTo({ left: i * track.clientWidth });
+    const update = () => {
+      const i = index();
+      count.textContent = `${i + 1} / ${total}`;
+      prev.disabled = i === 0;
+      next.disabled = i === total - 1;
+    };
+    prev.addEventListener('click', () => go(index() - 1));
+    next.addEventListener('click', () => go(index() + 1));
+    track.addEventListener('scroll', update, { passive: true });
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') go(index() - 1);
+      if (e.key === 'ArrowRight') go(index() + 1);
+    });
+  });
+</script>

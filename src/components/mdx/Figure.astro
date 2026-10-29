@@ -1,0 +1,33 @@
+---
+import { url } from '../../data/site';
+
+interface Props {
+  src: string;
+  alt?: string;
+  caption?: string;
+}
+
+const { src, alt = '', caption } = Astro.props;
+const slug = Astro.url.pathname.split('/').filter(Boolean).pop();
+---
+
+<figure class="figure wide">
+  <img src={url(`images/${slug}/${src}`)} alt={alt} loading="lazy" decoding="async" />
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .figure {
+    margin-inline: 0;
+  }
+  .figure img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+  }
+  figcaption {
+    margin-top: 12px;
+    color: var(--fg-muted);
+    font-size: 16px;
+  }
+</style>

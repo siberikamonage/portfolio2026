@@ -1,0 +1,30 @@
+---
+import CarouselShell from './CarouselShell.astro';
+import { url } from '../../data/site';
+
+interface Props {
+  images: string[];
+  label?: string;
+}
+
+const { images, label = 'Project images' } = Astro.props;
+const slug = Astro.url.pathname.split('/').filter(Boolean).pop();
+---
+
+<CarouselShell label={label} count={images.length}>
+  {
+    images.map((src, i) => (
+      <div class="slide" role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${images.length}`}>
+        <img src={url(`images/${slug}/${src}`)} alt={`${label}, ${i + 1} of ${images.length}`} loading="lazy" decoding="async" />
+      </div>
+    ))
+  }
+</CarouselShell>
+
+<style>
+  .slide img {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+  }
+</style>

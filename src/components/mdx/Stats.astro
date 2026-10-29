@@ -1,0 +1,67 @@
+---
+interface Props {
+  items: { value: string; label: string }[];
+  accent?: string;
+}
+
+// Bento grid: the first stat is the tall accent card, the rest are grey.
+const { items, accent = '#080808' } = Astro.props;
+---
+
+<div class="stats wide" style={`--accent:${accent}`}>
+  {
+    items.map((item, i) => (
+      <div class:list={['stat', i === 0 && 'stat--accent']}>
+        <p class="stat__value">{item.value}</p>
+        <p class="stat__label">{item.label}</p>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.75fr;
+    grid-template-rows: auto auto;
+    gap: 24px;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 8px;
+    min-height: 228px;
+    padding: 48px;
+    border-radius: var(--radius-lg);
+    background: var(--grey-surface);
+  }
+  .stat:nth-child(1),
+  .stat:nth-child(2) {
+    grid-row: span 2;
+  }
+  .stat--accent {
+    background: var(--accent);
+    color: var(--white);
+  }
+  .stat__value {
+    font: 400 var(--fs-title) / 1.09 var(--font-display);
+    letter-spacing: -0.04em;
+  }
+  @media (max-width: 1199px) {
+    .stat {
+      padding: 32px;
+    }
+  }
+  @media (max-width: 809px) {
+    .stats {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .stat:nth-child(n) {
+      grid-row: auto;
+      min-height: 0;
+      padding: 24px;
+    }
+  }
+</style>

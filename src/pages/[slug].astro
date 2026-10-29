@@ -1,0 +1,121 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Figure from '../components/mdx/Figure.astro';
+import Gallery from '../components/mdx/Gallery.astro';
+import Carousel from '../components/mdx/Carousel.astro';
+import SlideCarousel from '../components/mdx/SlideCarousel.astro';
+import Callout from '../components/mdx/Callout.astro';
+import Stats from '../components/mdx/Stats.astro';
+import ResultCards from '../components/mdx/ResultCards.astro';
+import Split from '../components/mdx/Split.astro';
+import { url } from '../data/site';
+
+export async function getStaticPaths() {
+  const projects = (await getCollection('projects'))
+    .filter((p) => !p.data.nda)
+    .sort((a, b) => a.data.order - b.data.order);
+  return projects.map((project, i) => ({
+    params: { slug: project.id },
+    props: { project, next: projects[(i + 1) % projects.length] },
+  }));
+}
+
+const { project, next } = Astro.props;
+const { Content } = await render(project);
+const { title, description, cover, coverAlt, meta } = project.data;
+const components = { Figure, Gallery, Carousel, SlideCarousel, Callout, Stats, ResultCards, Split };
+---
+
+<Base title={title} description={description} image={`images/${cover}`} theme="light" variant="case">
+  <article>
+    <header class="case-hero container">
+      <h1 class="display title">{title}</h1>
+      <img class="case-hero__cover" src={url(`images/${cover}`)} alt={coverAlt} width="1312" height="738" />
+      {
+        meta && (
+          <dl class="case-meta">
+            <div><dt>Timeline</dt><dd>{meta.timeline}</dd></div>
+            <div><dt>Field</dt><dd>{meta.field}</dd></div>
+            <div><dt>Team</dt><dd>{meta.team}</dd></div>
+            <div><dt>My role</dt><dd>{meta.role}</dd></div>
+          </dl>
+        )
+      }
+    </header>
+
+    <div class="prose container">
+      <Content components={components} />
+    </div>
+  </article>
+
+  {
+    next.id !== project.id && (
+      <nav class="next container" aria-label="Next project">
+        <a href={url(next.id)} data-reveal>
+          <span class="muted">Next project</span>
+          <span class="display h2">{next.data.cardTitle} →</span>
+        </a>
+      </nav>
+    )
+  }
+</Base>
+
+<style>
+  .case-hero {
+    padding-top: calc(var(--header-h) + 24px);
+  }
+  .case-hero__cover {
+    width: 100%;
+    margin-top: 32px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+  }
+  .case-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin: 32px 0 0;
+  }
+  .case-meta dt {
+    color: var(--fg-muted);
+  }
+  .case-meta dd {
+    margin: 16px 0 0;
+  }
+  .prose {
+    padding-top: 40px;
+  }
+  .next {
+    margin-top: 160px;
+  }
+  .next a {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 48px;
+    border-radius: var(--radius-lg);
+    background: var(--grey-surface);
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+  }
+  .next a:hover {
+    background: #ececec;
+  }
+  @media (max-width: 809px) {
+    .case-meta {
+      grid-template-columns: 1fr 1fr;
+      font-size: 16px;
+    }
+    .case-meta dd {
+      margin-top: 4px;
+    }
+    .next {
+      margin-top: 96px;
+    }
+    .next a {
+      padding: 24px;
+    }
+  }
+</style>
