@@ -1,6 +1,5 @@
 /* ---------- Fonts ----------
-   Licensed files go in public/fonts/ (see public/fonts/README.md).
-   Until they are added, the free look-alikes loaded in Base.astro are used. */
+   Licensed files live in public/fonts/ (see public/fonts/README.md). */
 @font-face {
   font-family: 'Sharp Grotesk';
   src: url('/fonts/SharpGrotesk-Book20.woff2') format('woff2');
@@ -34,8 +33,8 @@
   --grey-surface: #f5f5f5;
   --muted-word: #5e5e5e;
 
-  --font-display: 'Sharp Grotesk', 'Space Grotesk', system-ui, sans-serif;
-  --font-body: 'Neue Montreal', 'Inter Tight', system-ui, sans-serif;
+  --font-display: 'Sharp Grotesk', system-ui, sans-serif;
+  --font-body: 'Neue Montreal', system-ui, sans-serif;
 
   --gutter: 64px;
   --prose-width: 1064px;

@@ -35,13 +35,6 @@ const ogImage = new URL(url(image), Astro.site);
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- Free fallbacks until the licensed fonts are added to public/fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,400;0,500;1,400&family=Space+Grotesk:wght@400&display=swap"
-    />
 
     <script is:inline>document.documentElement.classList.add('js');</script>
   </head>
